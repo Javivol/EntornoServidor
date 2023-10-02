@@ -8,52 +8,50 @@
 </head>
 
 <body>
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <form method="get" action="/ejercicios1/Calc2.php">
         <input type="text" name="numero1" id="numero1">
         <input type="text" name="numero2" id="numero2">
-        <select name="operador" id="operador">
-            <option value="Sumar">Sumar</option>
-            <option value="Restar">Restar</option>
-            <option value="Multiplicar">Multiplicar</option>
-            <option value="Dividir">Dividir</option>
-        </select><br><br>
-        <input type="submit" name="Calcular" value="Calcular">
+        <input type="submit" value="Sumar" name="submit">
+        <input type="submit" value="Restar" name="submit">
+        <input type="submit" value="Multiplicar" name="submit">
+        <input type="submit" value="Dividir" name="submit">
 
     </form>
 
     <?php
-        $resultado=0;
-        echo "<br>Resultado = ".$resultado;
-        if(isset($_POST['calcular'])){
-            $numero1 = $_POST['numero1'];
-            $numero2 = $_POST['numero2'];
-            $operador = $_POST['operador'];
+    $resultado = 0;
+    if (isset($_GET['submit'])) {
+        $numero1 = $_GET["numero1"];
+        $numero2 = $_GET["numero2"];
+        $operador = $_GET ["submit"];
 
-            if(is_numeric($numero1) && is_numeric($numero2)){
-                switch($operador){
-                    case 'Sumar':
-                        $resultado = $numero1 + $numero2;
-                        break;
-                    case 'Restar':
-                        $resultado = $numero1 - $numero2;
-                        break;
-                    case 'Multiplicar':
-                        $resultado = $numero1 * $numero2;
-                        break;
-                    case 'Dividir':
-                        if($numero2 != 0){
-                            $resultado = $numero1/$numero2;
-                        } else{
-                            echo "No se puede dividir entre 0";
-                        }
-                        break;
-                    default:
-                        echo "Operador no válido";
-                }
-            } else{
-                echo "Por favor, ingresa números válidos";
+        if (is_numeric($numero1) && is_numeric($numero2)) {
+            switch ($operador) {
+                case 'Sumar':
+                    $resultado = $numero1 + $numero2;
+                    break;
+                case 'Restar':
+                    $resultado = $numero1 - $numero2;
+                    break;
+                case 'Multiplicar':
+                    $resultado = $numero1 * $numero2;
+                    break;
+                case 'Dividir':
+                    if ($numero2 != 0) {
+                        $resultado = $numero1 / $numero2;
+                    } else {
+                        echo "No se puede dividir entre 0";
+                    }
+                    break;
+                default:
+                    echo "Operador no válido";
             }
+        } else {
+            echo "Por favor, ingresa números válidos";
         }
+    }
+    echo "<br>Resultado = " . $resultado;
+
 
     ?>
 </body>
